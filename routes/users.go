@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 	"seanThakur/go-restapi/models"
+	"seanThakur/go-restapi/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,5 +41,12 @@ func login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "Login successful!"})
+	token, err := utils.GenerateJwtToken(user.Email, user.ID)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "token not generated!"})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "Login successful!", "token": token})
 }

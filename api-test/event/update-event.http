@@ -1,8 +1,9 @@
-PUT http://localhost:8080/event/1
+PUT http://localhost:8080/event/12
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiZXhwIjoxNzMzNDg5NDk3LCJ1c2VySWQiOjN9.BwORmHrRPD7_8yQc2e35iPxhx3vAy0srqxj2Iq-Xx0M
 
 {
-    "name": "updated 1",
+    "name": "new updated 1",
     "description": "new updated first desc",
     "location": "Location update for event 1",
     "datetime": "2024-09-04T18:00:00.000Z"

@@ -7,14 +7,14 @@ import (
 
 type Event struct {
 	Id          int64
-	UserId      int
+	UserId      int64
 	Description string    `binding:"required"`
 	Name        string    `binding:"required"`
 	Location    string    `binding:"required"`
 	DateTime    time.Time `binding:"required"`
 }
 
-func (e Event) Save() error {
+func (e *Event) Save() error {
 	query := `INSERT INTO events(name, description, date_time, location, user_id) VALUES (?,?,?,?,?)`
 
 	stmt, err := db.DB.Prepare(query)
@@ -74,7 +74,7 @@ func GetEventById(id int64) (*Event, error) {
 	return &event, nil
 }
 
-func (event Event) Update() error {
+func (event *Event) Update() error {
 	query := `
 		UPDATE events
 		SET
@@ -99,7 +99,7 @@ func (event Event) Update() error {
 
 }
 
-func (event Event) Delete() error {
+func (event *Event) Delete() error {
 	query := `
 		DELETE FROM events WHERE id = ?
 	`

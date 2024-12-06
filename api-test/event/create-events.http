@@ -1,9 +1,10 @@
 POST http://localhost:8080/events
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlYW50aGFrdXJAZ21haWwuY29tIiwiZXhwIjoxNzMzNDg5MjE1LCJ1c2VySWQiOjJ9.3krVDRdkVBODVEoo6ZA20NJGfmptkReZfJN77xdvytc
 
 {
-    "name": "Event 1",
-    "description": "Event testing 1",
-    "location": "Location testing for event 1",
+    "name": "Event seanthakur new 1",
+    "description": "Event testing new 1",
+    "location": "Location testing for event new 1",
     "datetime": "2024-04-04T13:00:00.000Z"
 }

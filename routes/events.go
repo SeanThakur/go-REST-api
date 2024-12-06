@@ -34,17 +34,18 @@ func getEvent(context *gin.Context) {
 }
 
 func createEvent(context *gin.Context) {
+	userId := context.GetInt64("userId")
 	var event models.Event
 	err := context.ShouldBindJSON(&event)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, LooseDict{"message": "Could not parse request data."})
 		return
 	}
-	event.Id = 1
-	event.UserId = 1
+	event.UserId = userId
 	err = event.Save()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, LooseDict{"message": "error while creating event"})
+		return
 	}
 	context.JSON(http.StatusCreated, LooseDict{"message": "Event Created", "event": event})
 }
@@ -56,10 +57,16 @@ func updateEvent(context *gin.Context) {
 		return
 	}
 
-	_, err = models.GetEventById(eventId)
+	userId := context.GetInt64("userId")
+	event, err := models.GetEventById(eventId)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, LooseDict{"message": "Could not find event id"})
+		return
+	}
+
+	if event.UserId != userId {
+		context.JSON(http.StatusUnauthorized, LooseDict{"message": "No authorized to do this action"})
 		return
 	}
 
@@ -75,6 +82,7 @@ func updateEvent(context *gin.Context) {
 	err = updateEvent.Update()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, LooseDict{"message": "Could not update event, please try again in sometime."})
+		return
 	}
 
 	context.JSON(http.StatusOK, LooseDict{"message": "Event updated successfully!"})
@@ -87,10 +95,16 @@ func deleteEvent(context *gin.Context) {
 		return
 	}
 
+	userId := context.GetInt64("userId")
 	result, err := models.GetEventById(eventId)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, LooseDict{"message": "Could not find event id"})
+		return
+	}
+
+	if result.UserId != userId {
+		context.JSON(http.StatusUnauthorized, LooseDict{"message": "No authorized to do this action"})
 		return
 	}
 
