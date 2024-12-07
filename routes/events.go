@@ -117,3 +117,7 @@ func deleteEvent(context *gin.Context) {
 
 	context.JSON(http.StatusOK, LooseDict{"message": "Event deleted successfully"})
 }
+
+func registerEvent(context *gin.Context) {
+
+}
