@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlYW50aGFrdXJAZ21haWwuY29tIiwiZXhwIjoxNzMzNDg5MjE1LCJ1c2VySWQiOjJ9.3krVDRdkVBODVEoo6ZA20NJGfmptkReZfJN77xdvytc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImV4cCI6MTczMzU2NTY1MCwidXNlcklkIjoyfQ.mNMzQOElhXLl4xIh57eF4ro2Qa_dyy8KJgGBnQeH_AI
 
 {
-    "name": "Event seanthakur new 1",
-    "description": "Event testing new 1",
-    "location": "Location testing for event new 1",
+    "name": "Event test2 user 2",
+    "description": "Event test2 desc new 2",
+    "location": "Location test for event new 2",
     "datetime": "2024-04-04T13:00:00.000Z"
 }

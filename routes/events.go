@@ -119,5 +119,24 @@ func deleteEvent(context *gin.Context) {
 }
 
 func registerEvent(context *gin.Context) {
+	userId := context.GetInt64("userId")
+	eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
+	if err != nil {
+		context.JSON(http.StatusBadGateway, LooseDict{"message": "could not find parse event id"})
+		return
+	}
 
+	event, err := models.GetEventById(eventId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, LooseDict{"message": "Could not find event id"})
+		return
+	}
+
+	err = event.Register(userId)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, LooseDict{"message": "Could not register this event"})
+		return
+	}
+
+	context.JSON(http.StatusCreated, LooseDict{"message": "Event Registered successfully"})
 }
